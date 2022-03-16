@@ -66,7 +66,7 @@ public class GameOverPanel extends JPanel {
     }
 
     /**
-     * Sets the game results, updates the UI, and saves results to the log file (if human was playing)
+     * Sets the game results and updates the UI
      */
     // TODO: refactor this method
     public void setGameResults(GameResult result){
@@ -81,13 +81,13 @@ public class GameOverPanel extends JPanel {
         }
     }
 
-    public void writeToFile(GameResult result) {
+    public void writeToFile() {
         // write stats to file
         try(CSVWriter writer = new CSVWriter(new FileWriter(StatsFile.FILENAME, true))) {
 
             String [] record = new String[2];
             record[0] = LocalDateTime.now().toString();
-            record[1] = Integer.toString(result.numGuesses);
+            record[1] = Integer.toString(gameResult.numGuesses);
 
             writer.writeNext(record);
         } catch (IOException e) {
