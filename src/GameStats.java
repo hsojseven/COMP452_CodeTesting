@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.util.ArrayList;
+
 /**
  * An interface for a data structure, DB API, file reader, etc. that
  * tells us how many games were played that took some number of guesses
@@ -15,4 +18,33 @@ public abstract class GameStats {
      * @return the maximum number of guesses that any game took
      */
     public abstract int maxNumGuesses();
+
+    /**
+     * Generic update for stats screen
+     * @param bin_edges
+     * @param resultsLabels
+     */
+    public void updatePanel(int[] bin_edges, ArrayList<JLabel> resultsLabels) {
+        for(int binIndex=0; binIndex<bin_edges.length; binIndex++){
+            final int lowerBound = bin_edges[binIndex];
+            int numGames = 0;
+
+            if(binIndex == bin_edges.length-1){
+                // last bin
+                // Sum all the results from lowerBound on up
+                for(int numGuesses=lowerBound; numGuesses<this.maxNumGuesses(); numGuesses++){
+                    numGames += this.numGames(numGuesses);
+                }
+            }
+            else{
+                int upperBound = bin_edges[binIndex+1];
+                for(int numGuesses=lowerBound; numGuesses <= upperBound; numGuesses++) {
+                    numGames += this.numGames(numGuesses);
+                }
+            }
+
+            JLabel resultLabel = resultsLabels.get(binIndex);
+            resultLabel.setText(Integer.toString(numGames));
+        }
+    }
 }
