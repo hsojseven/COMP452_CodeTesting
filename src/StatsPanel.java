@@ -94,6 +94,11 @@ public class StatsPanel extends JPanel {
         clearResults();
 
         GameStats stats = new StatsFile();
-        stats.updatePanel(BIN_EDGES, resultsLabels);
+        ArrayList<String> list = stats.getGuessList(BIN_EDGES);
+
+        for (int i = 0; i < list.size(); i++) {
+            JLabel resultLabel = resultsLabels.get(i);
+            resultLabel.setText(list.get(i));
+        }
     }
 }

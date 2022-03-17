@@ -22,9 +22,10 @@ public abstract class GameStats {
     /**
      * Generic update for stats screen
      * @param bin_edges
-     * @param resultsLabels
      */
-    public void updatePanel(int[] bin_edges, ArrayList<JLabel> resultsLabels) {
+    public ArrayList<String> getGuessList(int[] bin_edges) {
+        ArrayList<String> labels = new ArrayList<String>();
+
         for(int binIndex=0; binIndex<bin_edges.length; binIndex++){
             final int lowerBound = bin_edges[binIndex];
             int numGames = 0;
@@ -43,8 +44,8 @@ public abstract class GameStats {
                 }
             }
 
-            JLabel resultLabel = resultsLabels.get(binIndex);
-            resultLabel.setText(Integer.toString(numGames));
+            labels.add(Integer.toString(numGames));
         }
+        return labels;
     }
 }
