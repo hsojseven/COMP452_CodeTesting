@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import javax.swing.*;
 import com.formdev.flatlaf.*;
 import com.opencsv.CSVWriter;
@@ -73,7 +74,7 @@ public class GuessTheNumberUI {
         JPanel humanGuessesPanel = new HumanGuessesPanel(cardsPanel, gameResult -> {
             gameOverPanel.setGameResults(gameResult);
             try(CSVWriter writer = new CSVWriter(new FileWriter(StatsFile.FILENAME, true))) {
-                gameResult.writeToFile(writer);
+                gameResult.writeToFile(writer, LocalDateTime.now());
             }
             catch (IOException e) {
                 // NOTE: In a full implementation, we would log this error and possibly alert the user

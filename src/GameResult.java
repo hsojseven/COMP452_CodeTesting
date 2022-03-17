@@ -16,9 +16,9 @@ public class GameResult {
         this.numGuesses = numGuesses;
     }
 
-    public void writeToFile(CSVWriter writer) {
+    public void writeToFile(CSVWriter writer, LocalDateTime time) {
         String [] record = new String[2];
-        record[0] = LocalDateTime.now().toString();
+        record[0] = time.toString();
         record[1] = Integer.toString(numGuesses);
 
         writer.writeNext(record);
