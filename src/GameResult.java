@@ -1,3 +1,6 @@
+import com.opencsv.CSVWriter;
+import java.time.LocalDateTime;
+
 /**
  * Data class to hold the result of a game
  * NOTE: You can refactor and edit this file if needed
@@ -11,5 +14,13 @@ public class GameResult {
         this.humanWasPlaying = humanWasPlaying;
         this.correctValue = correctValue;
         this.numGuesses = numGuesses;
+    }
+
+    public void writeToFile(CSVWriter writer) {
+        String [] record = new String[2];
+        record[0] = LocalDateTime.now().toString();
+        record[1] = Integer.toString(numGuesses);
+
+        writer.writeNext(record);
     }
 }
