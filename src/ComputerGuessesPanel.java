@@ -92,7 +92,8 @@ public class ComputerGuessesPanel extends JPanel {
         guessMessage.setText("I guess ___.");
 
         // Send the result of the finished game to the callback
-        gameFinishedCallback.accept(game.getResult());
+        GameResult result = new GameResult(false, game.getLastGuess(), game.getNumGuesses());
+        gameFinishedCallback.accept(result);
 
         CardLayout cardLayout = (CardLayout) cardsPanel.getLayout();
         cardLayout.show(cardsPanel, ScreenID.GAME_OVER.name());
